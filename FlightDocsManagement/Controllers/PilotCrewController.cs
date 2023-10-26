@@ -5,7 +5,7 @@ namespace FlightDocsManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PilotController : ControllerBase
+    public class PilotCrewController : ControllerBase
     {
     }
 }
