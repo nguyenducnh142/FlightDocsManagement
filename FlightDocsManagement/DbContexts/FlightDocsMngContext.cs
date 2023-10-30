@@ -8,5 +8,6 @@ namespace FlightDocsManagement.DbContexts
         public DbSet<Docs> Docs { get; set; }
         public DbSet<DocsType> DocsTypes { get; set; }
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<DocsPermission> DocsPermissions { get; set; }
     }
 }
