@@ -24,19 +24,16 @@ namespace FlightDocsManagement.Repository.Repositories
             return _dbContext.Flights.ToList();
         }
 
-        //Get Docs By FlightId and Docs's Version = 0
         public IEnumerable<Docs> GetOriginDocsByFlightId(string flightId)
         {
             return _dbContext.Docs.Where(d => d.FlightId == flightId && d.Version == "0").ToList();
         }
 
-        //Get Docs By FlightId and Docs's Version != 0
         public IEnumerable<Docs> GetUpdateDocsByFlightId(string flightId)
         {
             return _dbContext.Docs.Where(d => d.FlightId == flightId && d.Version != "0").ToList();
         }
 
-        //Upload Docs
         public void UploadDocs(Docs docs, IFormFile file)
         {
             var flight = _dbContext.Flights.FirstOrDefault(f => f.FlightId == docs.FlightId);
@@ -58,7 +55,6 @@ namespace FlightDocsManagement.Repository.Repositories
             Save();
         }
 
-        //Update Docs
         public void UpdateDocs(Docs docs, string roleId)
         {
             var user = _dbContext.DocsPermissions.FirstOrDefault(u => u.RoleId == roleId && u.DocsName == docs.DocsName);
@@ -92,8 +88,6 @@ namespace FlightDocsManagement.Repository.Repositories
             Save();
         }
 
-
-        //Update File Docs
         public void UpdateFileDocs( string docsName, IFormFile file, string roleId)
         {
             var user = _dbContext.DocsPermissions.FirstOrDefault(u => u.RoleId == roleId && u.DocsName == docsName);
@@ -124,7 +118,6 @@ namespace FlightDocsManagement.Repository.Repositories
             Save();
         }
 
-        //download file by file name
         public async Task<IActionResult> DownloadFile(string fileName)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs", fileName);
@@ -137,5 +130,9 @@ namespace FlightDocsManagement.Repository.Repositories
             return new FileStreamResult(memory, "application/pdf");
         }
 
+        public IEnumerable<Docs> GetDocsByTypeId(string typeId)
+        {
+            return _dbContext.Docs.Where(d => d.TypeId == typeId).ToList();
+        }
     }
 }

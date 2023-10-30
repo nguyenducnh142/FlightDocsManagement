@@ -40,7 +40,7 @@ namespace FlightDocsManagement.Controllers
 
         //Add file docs
         [HttpPost("AddDocs/{flightId}")]
-        public IActionResult AddDocs(string flightId, [FromForm] Docs docs, IFormFile file)
+        public IActionResult AddDocs( [FromForm] Docs docs, IFormFile file)
         {
             if (docs == null)
             {
@@ -50,8 +50,8 @@ namespace FlightDocsManagement.Controllers
             {
                 return BadRequest();
             }
-            _gORepository.AddDocs(flightId, docs, file);
-            return new OkObjectResult(flightId);
+            _gORepository.UploadDocs(docs, file);
+            return new OkObjectResult(docs.FlightId);
         }
 
         //Get All Docs
@@ -64,9 +64,9 @@ namespace FlightDocsManagement.Controllers
 
         //Change Docs's TypeId
         [HttpPut("ChangeDocsType/{docsName}/{typeId}")]
-        public IActionResult ChangeDocsTypeId(string docsName, int typeId)
+        public IActionResult ChangeDocsTypeId(string docsName, string typeId)
         {
-            _gORepository.ChangeDocsTypeId(docsName, typeId);
+            _gORepository.ChangeDocsType(docsName, typeId);
             return new OkObjectResult(docsName);
         }
 
@@ -90,8 +90,40 @@ namespace FlightDocsManagement.Controllers
         [HttpPut("ChangeDocsTypeName/{typeId}/{typeName}")]
         public IActionResult ChangeDocsTypeName(string typeId, string typeName)
         {
-            _gORepository.ChangeDocsTypeName(typeId, typeName);
+            _gORepository.ChangeTypeName(typeId, typeName);
             return new OkObjectResult(typeId);
+        }
+
+        //Update Docs
+        [HttpPut("UpdateDocs")]
+        public IActionResult UpdateDocs(Docs docs)
+        {
+            if (docs == null)
+            {
+                return BadRequest("Docs is null.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _gORepository.UpdateDocs(docs);
+            return new OkObjectResult(docs);
+        }
+
+        //Update File Docs
+        [HttpPut("UpdateFileDocs/{docsName}")]
+        public IActionResult UpdateFileDocs(string docsName, IFormFile file)
+        {
+            if (docsName == null)
+            {
+                return BadRequest("DocsName is null.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _gORepository.UpdateFileDocs(docsName, file);
+            return new OkObjectResult(docsName);
         }
     }
 }

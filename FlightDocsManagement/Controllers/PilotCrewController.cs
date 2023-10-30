@@ -55,11 +55,11 @@ namespace FlightDocsManagement.Controllers
         }
         //Update Docs
         [HttpPut("UpdateDocs/{flightId}")]
-        public IActionResult UpdateDocs( [FromForm] Docs docs)
+        public IActionResult UpdateDocs([FromForm] Docs docs, string roleId)
         {
             try
             {
-                _pilotCrewRepository.UpdateDocs(docs);
+                _pilotCrewRepository.UpdateDocs(docs, roleId);
                 return Ok();
             }
             catch (Exception e)
@@ -68,6 +68,42 @@ namespace FlightDocsManagement.Controllers
             }
         }
 
+        //Update File Docs
+        [HttpPut("UpdateFileDocs/{docsName}")]
+        public IActionResult UpdateFileDocs(string docsName, [FromForm] IFormFile file, string roleId)
+        {
+            try
+            {
+                _pilotCrewRepository.UpdateFileDocs(docsName, file, roleId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        //Download File
+        [HttpGet("DownloadFile/{fileName}")]
+        public async Task<IActionResult> DownloadFile(string fileName)
+        {
+            try
+            {
+                return await _pilotCrewRepository.DownloadFile(fileName);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        //Get Docs by TypeId
+        [HttpGet("GetDocsByTypeId/{typeId}")]
+        public IActionResult GetDocsByTypeId(string typeId)
+        {
+            var subjects = _pilotCrewRepository.GetDocsByTypeId(typeId);
+            return new OkObjectResult(subjects);
+        }
         
+
     }
 }

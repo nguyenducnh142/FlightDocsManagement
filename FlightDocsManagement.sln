@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDocsManagement", "FlightDocsManagement\FlightDocsManagement.csproj", "{9CB74D1E-9CB6-4B8D-B640-FF719308182F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDocsManagement", "FlightDocsManagement\FlightDocsManagement.csproj", "{9CB74D1E-9CB6-4B8D-B640-FF719308182F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D6C69ADF-3BEF-48D1-BEFB-0908FD0236E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateWay", "APIGateWay\APIGateWay.csproj", "{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{9CB74D1E-9CB6-4B8D-B640-FF719308182F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CB74D1E-9CB6-4B8D-B640-FF719308182F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CB74D1E-9CB6-4B8D-B640-FF719308182F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9CB74D1E-9CB6-4B8D-B640-FF719308182F} = {D6C69ADF-3BEF-48D1-BEFB-0908FD0236E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BFBCE8A-8092-49CC-BDE6-7EE911DC6364}
