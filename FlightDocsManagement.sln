@@ -3,11 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDocsManagement", "FlightDocsManagement\FlightDocsManagement.csproj", "{9CB74D1E-9CB6-4B8D-B640-FF719308182F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDocsService", "FlightDocsManagement\FlightDocsService.csproj", "{9CB74D1E-9CB6-4B8D-B640-FF719308182F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D6C69ADF-3BEF-48D1-BEFB-0908FD0236E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateWay", "APIGateWay\APIGateWay.csproj", "{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateWay", "APIGateWay\APIGateWay.csproj", "{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemService", "Account\SystemService.csproj", "{F4F1FA87-DA41-4CA0-A508-105B13678FAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginService", "Login\LoginService.csproj", "{8890C969-B966-47B6-ABDF-EEB085AF33CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extention", "Extention", "{3D858D6B-4AC0-454E-8DD8-0AFD6B377D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtTokenAuthentication", "JwtTokenAuthentication\JwtTokenAuthentication.csproj", "{60355098-BD57-4275-8C1A-6E9193AA5073}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +31,27 @@ Global
 		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FF9F78C-A14C-4ECE-A6C6-5DF89D050805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4F1FA87-DA41-4CA0-A508-105B13678FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4F1FA87-DA41-4CA0-A508-105B13678FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4F1FA87-DA41-4CA0-A508-105B13678FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4F1FA87-DA41-4CA0-A508-105B13678FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8890C969-B966-47B6-ABDF-EEB085AF33CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8890C969-B966-47B6-ABDF-EEB085AF33CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8890C969-B966-47B6-ABDF-EEB085AF33CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8890C969-B966-47B6-ABDF-EEB085AF33CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60355098-BD57-4275-8C1A-6E9193AA5073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60355098-BD57-4275-8C1A-6E9193AA5073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60355098-BD57-4275-8C1A-6E9193AA5073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60355098-BD57-4275-8C1A-6E9193AA5073}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9CB74D1E-9CB6-4B8D-B640-FF719308182F} = {D6C69ADF-3BEF-48D1-BEFB-0908FD0236E9}
+		{F4F1FA87-DA41-4CA0-A508-105B13678FAA} = {D6C69ADF-3BEF-48D1-BEFB-0908FD0236E9}
+		{8890C969-B966-47B6-ABDF-EEB085AF33CB} = {D6C69ADF-3BEF-48D1-BEFB-0908FD0236E9}
+		{60355098-BD57-4275-8C1A-6E9193AA5073} = {3D858D6B-4AC0-454E-8DD8-0AFD6B377D0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BFBCE8A-8092-49CC-BDE6-7EE911DC6364}

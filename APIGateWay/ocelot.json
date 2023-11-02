@@ -1,0 +1,17 @@
+﻿{ //localhost:5008
+  "Routes": [
+    //========================Login========================
+    {
+      "DownstreamPathTemplate": "/Login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7156
+        }
+      ],
+      "UpstreamPathTemplate": "/Login",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}

@@ -125,6 +125,70 @@ namespace FlightDocsManagement.Controllers
             _gORepository.UpdateFileDocs(docsName, file);
             return new OkObjectResult(docsName);
         }
+
+        //Add Flight
+        [HttpPost("AddFlight")]
+        public IActionResult AddFlight(Flight flight)
+        {
+            if (flight == null)
+            {
+                return BadRequest("Flight is null.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _gORepository.AddFlight(flight);
+            return new OkObjectResult(flight);
+        }
+
+        //Add docs permission
+        [HttpPost("AddDocsPermission")]
+        public IActionResult AddDocsPermission(DocsPermission docsPermission)
+        {
+            if (docsPermission == null)
+            {
+                return BadRequest("DocsPermission is null.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _gORepository.AddDocsPermission(docsPermission);
+            return new OkObjectResult(docsPermission);
+        }
+
+        //Update Docs permission
+        [HttpPut("UpdateDocsPermission")]
+        public IActionResult UpdateDocsPermission(DocsPermission docsPermission)
+        {
+            if (docsPermission == null)
+            {
+                return BadRequest("DocsPermission is null.");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _gORepository.UpdateDocsPermission(docsPermission);
+            return new OkObjectResult(docsPermission);
+        }
+
+        //Delete Docs permission
+        [HttpDelete("DeleteDocsPermission")]
+        public IActionResult DeleteDocsPermission(DocsPermission docsPermission)
+        {
+            _gORepository.DeleteDocsPermission(docsPermission);
+            return new OkObjectResult(docsPermission);
+        }
+
+        //Get Docs permission
+        [HttpGet("GetDocsPermission")]
+        public IActionResult GetDocsPermission()
+        {
+            var docsPermission = _gORepository.GetDocsPermission();
+            return new OkObjectResult(docsPermission);
+        }
     }
 }
     

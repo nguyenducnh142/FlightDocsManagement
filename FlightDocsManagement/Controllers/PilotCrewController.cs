@@ -2,6 +2,8 @@
 using FlightDocsManagement.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
+using System.Security.Claims;
 
 namespace FlightDocsManagement.Controllers
 {
@@ -13,6 +15,12 @@ namespace FlightDocsManagement.Controllers
         public PilotCrewController(IPilotCrewRepository pilotCrewRepository)
         {
             _pilotCrewRepository = pilotCrewRepository;
+        }
+        [HttpGet("getrole")]
+        public string GetRoleId()
+        {
+            string id = Convert.ToString(HttpContext.User.FindFirstValue("RoleId"));
+            return id;
         }
 
         //Get Flights
@@ -55,11 +63,11 @@ namespace FlightDocsManagement.Controllers
         }
         //Update Docs
         [HttpPut("UpdateDocs/{flightId}")]
-        public IActionResult UpdateDocs([FromForm] Docs docs, string roleId)
+        public IActionResult UpdateDocs([FromForm] Docs docs)
         {
             try
             {
-                _pilotCrewRepository.UpdateDocs(docs, roleId);
+                _pilotCrewRepository.UpdateDocs(docs, GetRoleId());
                 return Ok();
             }
             catch (Exception e)
@@ -83,7 +91,7 @@ namespace FlightDocsManagement.Controllers
             }
         }
 
-        //Download File
+        /*//Download File
         [HttpGet("DownloadFile/{fileName}")]
         public async Task<IActionResult> DownloadFile(string fileName)
         {
@@ -95,7 +103,24 @@ namespace FlightDocsManagement.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }*/
+
+        //Download file
+        [HttpGet("DownloadFile/{fileName}")]
+        public async Task<IActionResult> DownloadFile(string fileName)
+        {
+            var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs", fileName);
+
+            var provider = new FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(filepath, out var contenttype))
+            {
+                contenttype = "application/octet-stream";
+            }
+
+            var bytes = await System.IO.File.ReadAllBytesAsync(filepath);
+            return File(bytes, contenttype, Path.GetFileName(filepath));
         }
+
         //Get Docs by TypeId
         [HttpGet("GetDocsByTypeId/{typeId}")]
         public IActionResult GetDocsByTypeId(string typeId)

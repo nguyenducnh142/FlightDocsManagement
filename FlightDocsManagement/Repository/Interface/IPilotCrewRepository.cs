@@ -12,6 +12,6 @@ namespace FlightDocsManagement.Repository.Interface
         void UploadDocs(Docs docs, IFormFile file);
         void UpdateDocs( Docs docs, string roleId);
         void UpdateFileDocs(string docsName, IFormFile file, string roleId);
-        Task<IActionResult> DownloadFile(string fileName);
+        /*Task<IActionResult> DownloadFile(string fileName);*/
     }
 }

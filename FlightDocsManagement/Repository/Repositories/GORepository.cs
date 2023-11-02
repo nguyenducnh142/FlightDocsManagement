@@ -25,9 +25,9 @@ namespace FlightDocsManagement.Repository.Repositories
         public IEnumerable<Flight> GetCurrentFlights()
         {
             return _dbContext.Flights.Where(
-                f => f.FlightDate.Date == DateTime.Today.Date && 
-                f.FlightDate > DateTime.Now && 
-                f.FlightDate <= DateTime.Now.AddMinutes(f.FlightTime))
+                f => f.FlightDate.DayOfYear == DateTime.Today.DayOfYear && 
+                f.FlightDate < DateTime.Now && 
+                f.FlightDate.AddMinutes(f.FlightTime) >= DateTime.Now)
                 .ToList();
         }
 
@@ -118,6 +118,7 @@ namespace FlightDocsManagement.Repository.Repositories
             {
                 throw new Exception("Flight is completed");
             }
+            doc.UpdateDate = DateTime.Now;
             var fileName = docsName + Path.GetExtension(file.FileName);
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs", fileName);
             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -138,9 +139,17 @@ namespace FlightDocsManagement.Repository.Repositories
             {
                 throw new Exception("Flight is completed");
             }
+            docs.UpdateDate = DateTime.Now;
             _dbContext.Docs.Add(docs);
             var fileName = docs.DocsName + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs", fileName);
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            var filePath = Path.Combine(path, fileName);
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 file.CopyTo(stream);
@@ -148,5 +157,45 @@ namespace FlightDocsManagement.Repository.Repositories
             Save();
         }
 
+        public void AddFlight(Flight flight)
+        {
+            _dbContext.Flights.Add(flight);
+            Save();
+        }
+
+        public void AddDocsPermission(DocsPermission docsPermission)
+        {
+            _dbContext.DocsPermissions.Add(docsPermission);
+            Save();
+        }
+
+        public void UpdateDocsPermission(DocsPermission docsPermission)
+        {
+            var docsPermissionUpdate = _dbContext.DocsPermissions.FirstOrDefault(d => d.DocsName == docsPermission.DocsName && d.RoleId == docsPermission.RoleId);
+            if (docsPermissionUpdate == null)
+            {
+                throw new Exception("DocsPermission not found");
+            }
+            docsPermissionUpdate.RoleId = docsPermission.RoleId;
+            docsPermissionUpdate.DocsName = docsPermission.DocsName;
+            _dbContext.DocsPermissions.Update(docsPermissionUpdate);
+            Save();
+        }
+
+        public void DeleteDocsPermission(DocsPermission docsPermission)
+        {
+            var docsPermissionDelete = _dbContext.DocsPermissions.FirstOrDefault(d => d.DocsName == docsPermission.DocsName && d.RoleId == docsPermission.RoleId);
+            if (docsPermissionDelete == null)
+            {
+                throw new Exception("DocsPermission not found");
+            }
+            _dbContext.DocsPermissions.Remove(docsPermissionDelete);
+            Save();
+        }
+
+        public IEnumerable<DocsPermission> GetDocsPermission()
+        {
+            return _dbContext.DocsPermissions.ToList();
+        }
     }
 }

@@ -1,13 +1,13 @@
+using LoginService.DbContexts;
+using LoginService.Repositories.Interface;
+using LoginService.Repositories.Repository;
 using Microsoft.EntityFrameworkCore;
-using SystemManage.DbContexts;
-using SystemManage.Repository.Interface;
-using SystemManage.Repository.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConn")));
-builder.Services.AddScoped<IGORepository, GORepository>();
+builder.Services.AddDbContext<LoginContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConn")));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

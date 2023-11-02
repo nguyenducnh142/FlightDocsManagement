@@ -2,6 +2,7 @@
 using FlightDocsManagement.Models;
 using FlightDocsManagement.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace FlightDocsManagement.Repository.Repositories
 {
@@ -57,11 +58,6 @@ namespace FlightDocsManagement.Repository.Repositories
 
         public void UpdateDocs(Docs docs, string roleId)
         {
-            var user = _dbContext.DocsPermissions.FirstOrDefault(u => u.RoleId == roleId && u.DocsName == docs.DocsName);
-            if (user == null)
-            {
-                throw new Exception("You don't have permission to edit this file");
-            }
             var flight = _dbContext.Flights.FirstOrDefault(f => f.FlightId == docs.FlightId);
             if (flight == null)
             {
@@ -75,6 +71,11 @@ namespace FlightDocsManagement.Repository.Repositories
             if (docsUpdate == null)
             {
                 throw new Exception("Docs not found");
+            }
+            var user = _dbContext.DocsPermissions.FirstOrDefault(u => u.RoleId == roleId && u.DocsName == docs.DocsName);
+            if (user == null)
+            {
+                throw new Exception("You don't have permission to edit this file");
             }
             {
                 docsUpdate.Version = docs.Version;
@@ -90,15 +91,15 @@ namespace FlightDocsManagement.Repository.Repositories
 
         public void UpdateFileDocs( string docsName, IFormFile file, string roleId)
         {
-            var user = _dbContext.DocsPermissions.FirstOrDefault(u => u.RoleId == roleId && u.DocsName == docsName);
-            if (user == null)
-            {
-                throw new Exception("You don't have permission to edit this file");
-            }
             var doc = _dbContext.Docs.FirstOrDefault(d => d.DocsName == docsName);
             if (doc == null)
             {
                 throw new Exception("doc not found");
+            }
+            var user = _dbContext.DocsPermissions.FirstOrDefault(u => u.RoleId == roleId && u.DocsName == docsName);
+            if (user == null)
+            {
+                throw new Exception("You don't have permission to edit this file");
             }
             var flight = _dbContext.Flights.FirstOrDefault(f => f.FlightId == doc.FlightId);
             if (flight == null)
@@ -118,9 +119,10 @@ namespace FlightDocsManagement.Repository.Repositories
             Save();
         }
 
-        public async Task<IActionResult> DownloadFile(string fileName)
+       /* public async Task<IActionResult> DownloadFile(string fileName)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs", fileName);
+            
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
@@ -128,7 +130,8 @@ namespace FlightDocsManagement.Repository.Repositories
             }
             memory.Position = 0;
             return new FileStreamResult(memory, "application/pdf");
-        }
+        }*/
+        
 
         public IEnumerable<Docs> GetDocsByTypeId(string typeId)
         {

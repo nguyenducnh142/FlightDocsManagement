@@ -15,5 +15,10 @@ namespace FlightDocsManagement.Repository.Interface
         void AddDocsType(DocsType docsType);
         void ChangeDocsType(string docsName, string typeId);
         void ChangeTypeName(string typeId, string typeName);
+        void AddFlight(Flight flight);
+        void AddDocsPermission(DocsPermission docsPermission);
+        void UpdateDocsPermission(DocsPermission docsPermission);
+        void DeleteDocsPermission(DocsPermission docsPermission);
+        IEnumerable<DocsPermission> GetDocsPermission();
     }
 }
