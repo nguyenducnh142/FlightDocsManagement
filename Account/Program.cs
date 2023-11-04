@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SystemManage.DbContexts;
 using SystemManage.Repository.Interface;
 using SystemManage.Repository.Repositories;
+using JwtTokenAuthentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SystemContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppConn")));
 builder.Services.AddScoped<IGORepository, GORepository>();
 builder.Services.AddControllers();
+builder.Services.AddJwtAuthentication();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,7 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -63,7 +63,7 @@ namespace FlightDocsManagement.Controllers
         }
 
         //Change Docs's TypeId
-        [HttpPut("ChangeDocsType/{docsName}/{typeId}")]
+        [HttpPut("ChangeDocsType/{typeId}")]
         public IActionResult ChangeDocsTypeId(string docsName, string typeId)
         {
             _gORepository.ChangeDocsType(docsName, typeId);
@@ -87,7 +87,7 @@ namespace FlightDocsManagement.Controllers
         }
 
         //Change DocsType's TypeName
-        [HttpPut("ChangeDocsTypeName/{typeId}/{typeName}")]
+        [HttpPut("ChangeDocsTypeName/{typeId}")]
         public IActionResult ChangeDocsTypeName(string typeId, string typeName)
         {
             _gORepository.ChangeTypeName(typeId, typeName);

@@ -119,20 +119,6 @@ namespace FlightDocsManagement.Repository.Repositories
             Save();
         }
 
-       /* public async Task<IActionResult> DownloadFile(string fileName)
-        {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "docs", fileName);
-            
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(filePath, FileMode.Open))
-            {
-                await stream.CopyToAsync(memory);
-            }
-            memory.Position = 0;
-            return new FileStreamResult(memory, "application/pdf");
-        }*/
-        
-
         public IEnumerable<Docs> GetDocsByTypeId(string typeId)
         {
             return _dbContext.Docs.Where(d => d.TypeId == typeId).ToList();
